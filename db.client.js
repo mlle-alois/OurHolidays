@@ -6,7 +6,7 @@ const sequelize = new Sequelize(
     'gynbskvhsqvgbs',
     '7a0792ab98a78fe845ad57189a2febaa093f341fd1fa8412eddcbe379d231592',
     {
-        host: 'ec2-52-211-158-144.eu-west-1.compute.amazonaws.com',
+        host: 'ec2-52-30-133-191.eu-west-1.compute.amazonaws.com',
         dialect: 'postgres',
         dialectOptions: {
             ssl: {
