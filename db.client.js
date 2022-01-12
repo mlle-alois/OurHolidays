@@ -1,10 +1,21 @@
 const { Sequelize } = require('sequelize')
 
 // database
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'database.sqlite'
-});
+const sequelize = new Sequelize(
+    'd4r694brgd4n2l',
+    'gynbskvhsqvgbs',
+    '7a0792ab98a78fe845ad57189a2febaa093f341fd1fa8412eddcbe379d231592',
+    {
+        host: 'ec2-52-211-158-144.eu-west-1.compute.amazonaws.com',
+        dialect: 'postgres',
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        },
+    },
+);
 
 // authentication and synchronization
 sequelize.authenticate()
