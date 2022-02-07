@@ -48,7 +48,6 @@ a {
 #image-container.active {
   display:block;
   background-color:rgba(0, 0, 0, 0.9);
-  background-image: url("../img/6087572.jpg");
   width:100%;
   height:100%;
   position:fixed;
