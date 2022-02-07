@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const pug = require('pug');
 const AWS = require('aws-sdk');
 const config = require('./config');
 
@@ -87,6 +86,23 @@ app.get('/destinations', async function (req, res, next) {
   res.send(JSON.stringify(destinations, null, 2));
 });
 
+app.get('/file/:filename', function (req, res) {
+  const params = {
+    Bucket: config.s3.bucket,
+    Key: req.params.filename,
+  };
+
+  s3.getObject(params, function (err, data) {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log(data);
+      res.contentType(data.ContentType);
+      res.send(data.Body);
+    }
+  });
+})
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -102,5 +118,11 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+/*const server = app.listen(port, function () {
+  const host = server.address().address;
+  const port = server.address().port;
+  console.log('app listening at http://%s:%s', host, port);
+});*/
 
 module.exports = app;
