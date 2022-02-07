@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="p-10 bg-white rounded-2xl shadow-lg">
+    <div class="p-10 bg-white rounded-2xl shadow-lg" style="width: 50%; float: left">
         <h1 class="font-semibold text-2xl">Our Holidays</h1>
         <h2 class="font-semibold text-xl">Add new destination</h2>
         <form class="flex flex-col pt-4" method="post" enctype="application/x-www-form-urlencoded">
@@ -23,16 +23,17 @@
             </div>
         </form>
     </div>
-    {% for destination in destinations %}
-        <div class="p-10 bg-white rounded-2xl shadow-lg mt-10">
+    <div class="p-10 bg-white rounded-2xl shadow-lg mt-10">
+        {% for destination in destinations %}
             <h2 class="font-semibold text-lg mb-2">{{ destination.name }}</h2>
             <p>{{ destination.description }}</p>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
     <div style="text-align: center;">
         <div id="album" style="margin-bottom: 20px">
             {% for image in images %}
                 <img class="preview" src="{{ image.url }}" width="300px"
+                     style="float: left; margin: 20px"
                      onclick="toggleImage(this, {{ image.full_suffix }})" alt="">
             {% endfor %}
         </div>
