@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const pug = require('pug');
 const AWS = require('aws-sdk');
 const config = require('./config');
 
@@ -36,7 +37,37 @@ app.get('/', async function (req, res, next) {
   try {
     destinations = await Destination.findAll();
   } catch (e) {}
-  res.render('index', {destinations: destinations});
+  const params = {
+    Bucket: config.s3.bucket,
+    Delimiter: '/'
+  };
+
+  const images = [];
+  s3.listObjects(params, function (err, data) {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log(data)
+      for (i in data.Contents) {
+        const image = data.Contents[i];
+        const imageProps = {
+          url: '/file/' + image.Key,
+          full_suffix: config.suffix.full,
+          rotation: (Math.random() * 20 - 10)
+        };
+        images.push(imageProps);
+      }
+      res.render('index', {
+        'name': 'Gallery',
+        'images': images,
+        destinations: destinations
+      });
+    }
+  });res.render('index', {
+    'name': 'Gallery',
+    'images': images,
+    destinations: destinations
+  });
 });
 
 app.post('/', async function (req, res, next) {
@@ -71,58 +102,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.get('/', function (req, res) {
-
-  const params = {
-    Bucket: config.s3.bucket,
-    Delimiter: '/'
-  };
-
-  s3.listObjects(params, function (err, data) {
-    if (err) {
-      res.send(err);
-    } else {
-      const images = [];
-      console.log(data)
-      for (i in data.Contents) {
-        const image = data.Contents[i];
-        const imageProps = {
-          url: '/file/' + image.Key,
-          full_suffix: config.suffix.full,
-          rotation: (Math.random() * 20 - 10)
-        };
-        images.push(imageProps);
-      }
-      res.render('index', {
-        'name': 'Gallery',
-        'images': images
-      });
-    }
-  });
-});
-
-app.get('/file/:filename', function (req, res) {
-  const params = {
-    Bucket: config.s3.bucket,
-    Key: req.params.filename,
-  };
-
-  s3.getObject(params, function (err, data) {
-    if (err) {
-      res.send(err);
-    } else {
-      console.log(data);
-      res.contentType(data.ContentType);
-      res.send(data.Body);
-    }
-  });
-})
-
-/*const server = app.listen(port, function () {
-  const host = server.address().address;
-  const port = server.address().port;
-  console.log('app listening at http://%s:%s', host, port);
-});*/
 
 module.exports = app;
