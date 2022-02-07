@@ -33,7 +33,6 @@
         <div id="album" style="margin-bottom: 20px">
             {% for image in images %}
                 <img class="preview" src="{{ image.url }}" width="300px"
-                     style="float: left"
                      onclick="toggleImage(this, {{ image.full_suffix }})" alt="">
             {% endfor %}
         </div>
