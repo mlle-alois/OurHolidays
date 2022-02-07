@@ -51,13 +51,11 @@ app.get('/', async function (req, res, next) {
         const image = data.Contents[i];
         const imageProps = {
           url: '/file/' + image.Key,
-          full_suffix: config.suffix.full,
-          rotation: (Math.random() * 20 - 10)
+          full_suffix: config.suffix.full
         };
         images.push(imageProps);
       }
       res.render('index', {
-        'name': 'Gallery',
         'images': images,
         destinations: destinations
       });
