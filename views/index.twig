@@ -32,8 +32,8 @@
     <div style="text-align: center;">
         <div id="album" style="margin-bottom: 20px">
             {% for image in images %}
-                <img class="preview" src="{{ image.url }}" width="600px"
-                     style="transform: rotate({{ image.rotation }}deg)scale(0.8)"
+                <img class="preview" src="{{ image.url }}" width="300px"
+                     style="float: left"
                      onclick="toggleImage(this, {{ image.full_suffix }})" alt="">
             {% endfor %}
         </div>
