@@ -7,7 +7,7 @@ const logger = require('morgan');
 const app = express();
 
 // database dependency
-const Article = require('./article.js');
+const Destination = require('./destination.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,28 +20,28 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async function (req, res, next) {
-  let articles = [];
+  let destinations = [];
   try {
-    articles = await Article.findAll();
+    destinations = await Destination.findAll();
   } catch (e) {}
-  res.render('index', {articles});
+  res.render('index', {destinations: destinations});
 });
 
 app.post('/', async function (req, res, next) {
-  const {title, content} = req.body;
+  const {name, description} = req.body;
   console.log(req.body);
-  console.log(title);
-  console.log(content);
-  await Article.create({ title, content });
+  console.log(name);
+  console.log(description);
+  await Destination.create({ name, description });
   res.redirect('/');
 });
 
-app.get('/articles', async function (req, res, next) {
-  let articles = [];
+app.get('/destinations', async function (req, res, next) {
+  let destinations = [];
   try {
-    articles = await Article.findAll();
+    destinations = await Destination.findAll();
   } catch (e) {}
-  res.send(JSON.stringify(articles, null, 2));
+  res.send(JSON.stringify(destinations, null, 2));
 });
 
 // catch 404 and forward to error handler

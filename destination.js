@@ -1,29 +1,29 @@
 const { DataTypes, Model } = require('sequelize')
 const db = require('./db.client.js')
 
-class Article extends Model {}
+class Destination extends Model {}
 
-Article.init(
+Destination.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    content: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     sequelize: db,
-    modelName: 'Article',
-    tableName: 'articles',
+    modelName: 'Destination',
+    tableName: 'destinations',
   },
 )
 
-module.exports = Article
+module.exports = Destination
