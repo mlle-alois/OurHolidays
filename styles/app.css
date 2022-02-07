@@ -48,6 +48,7 @@ a {
 #image-container.active {
   display:block;
   background-color:rgba(0, 0, 0, 0.9);
+  background-image: url("https://www.google.com/search?q=holidays+4k&tbm=isch&ved=2ahUKEwiirL3Oge71AhVM8rsIHbgsC00Q2-cCegQIABAA&oq=holidays+4k&gs_lcp=CgNpbWcQAzoHCCMQ7wMQJzoFCAAQgAQ6BAgAEEM6BggAEAgQHjoGCAAQBRAeUMYGWNsLYKgNaABwAHgAgAE7iAHWAZIBATSYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=2EgBYqLgNczk7_UPuNms6AQ&bih=873&biw=1280&rlz=1C1ONGR_frFR932FR932#imgrc=Hu-ce2MAEQXxkM");
   width:100%;
   height:100%;
   position:fixed;
