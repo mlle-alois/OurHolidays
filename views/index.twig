@@ -1,14 +1,25 @@
 {% extends 'layout.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="styles/app.css"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="scripts/app.js"></script>
+{% endblock %}
+
 {% block body %}
     <div class="p-10 bg-white rounded-2xl shadow-lg">
         <h1 class="font-semibold text-2xl">Our Holidays</h1>
         <h2 class="font-semibold text-xl">Add new destination</h2>
         <form class="flex flex-col pt-4" method="post" enctype="application/x-www-form-urlencoded">
-            <input class="w-full bg-white shadow-lg rounded-xl border border-indigo-900 mb-4 p-4" type="text" name="name" placeholder="Name" />
-            <textarea class="w-full h-32 bg-white shadow-lg rounded-xl border border-indigo-900 mb-4 p-4" name="description" placeholder="Description"></textarea>
+            <input class="w-full bg-white shadow-lg rounded-xl border border-indigo-900 mb-4 p-4" type="text"
+                   name="name" placeholder="Name"/>
+            <textarea class="w-full h-32 bg-white shadow-lg rounded-xl border border-indigo-900 mb-4 p-4"
+                      name="description" placeholder="Description"></textarea>
             <div class="input-group-btn">
-                <input class="bg-indigo-900 text-white rounded-xl shadow-lg px-4 py-2 cursor-pointer" type="submit" value="Create !" />
+                <input class="bg-indigo-900 text-white rounded-xl shadow-lg px-4 py-2 cursor-pointer" type="submit"
+                       value="Create !"/>
             </div>
         </form>
     </div>
@@ -18,4 +29,13 @@
             <p>{{ destination.description }}</p>
         </div>
     {% endfor %}
+    <div style="text-align: center;">
+        <div id="album" style="margin-bottom: 20px">
+            {% for image in images %}
+                <img class="preview" src="{{ image.url }}" width="600px"
+                     style="transform: rotate({{ image.rotation }}deg)scale(0.8)"
+                     onclick="toggleImage(this, {{ image.full_suffix }})" alt="">
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

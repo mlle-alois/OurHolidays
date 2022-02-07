@@ -8,6 +8,8 @@
     "css": "npx tailwindcss -i ./public/assets/tailwind.css -o ./public/assets/main.css --watch"
   },
   "dependencies": {
+    "aws-sdk": "^2.2.26",
+    "basic-auth-connect": "^1.0.0",
     "cookie-parser": "1.4.4",
     "debug": "2.6.9",
     "express": "4.16.1",
