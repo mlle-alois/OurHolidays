@@ -62,10 +62,6 @@ app.get('/', async function (req, res, next) {
         destinations: destinations
       });
     }
-  });res.render('index', {
-    'name': 'Gallery',
-    'images': images,
-    destinations: destinations
   });
 });
 
