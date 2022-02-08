@@ -490,7 +490,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .border-900 {
   --tw-border-opacity: 1;
-  border-color: RGB(0, 129, 82 / var(--tw-border-opacity));
+  border-color: RGB(0, 129, 82);
 }
 
 .bg-white {
@@ -500,7 +500,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-900 {
   --tw-bg-opacity: 1;
-  background-color: RGB(0, 129, 82 / var(--tw-bg-opacity));
+  background-color: RGB(0, 129, 82);
 }
 
 .p-10 {
