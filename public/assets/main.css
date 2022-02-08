@@ -488,9 +488,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-width: 1px;
 }
 
-.border-indigo-900 {
+.border-900 {
   --tw-border-opacity: 1;
-  border-color: rgb(49 46 129 / var(--tw-border-opacity));
+  border-color: RGB(0, 129, 82 / var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -498,9 +498,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-indigo-900 {
+.bg-900 {
   --tw-bg-opacity: 1;
-  background-color: rgb(49 46 129 / var(--tw-bg-opacity));
+  background-color: RGB(0, 129, 82 / var(--tw-bg-opacity));
 }
 
 .p-10 {
