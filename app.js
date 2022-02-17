@@ -63,13 +63,23 @@ app.get('/', async function (req, res, next) {
             });
         }
     });
+    request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
+        headers: {
+            'x-trustifi-key': process.env.TRUSTIFI_KEY,
+            'x-trustifi-secret': process.env.TRUSTIFI_SECRET
+        },
+        json: {
+            "recipients": [{"email": "alois.zimmermann45@gmail.com"}],
+            "title": "New connection on Our Holidays",
+            "html": "We hope you enjoy the app !"
+        }
+    }, (err, res, body) => {
+        console.log(body);
+    });
 });
 
 app.post('/', async function (req, res, next) {
     const {name, description} = req.body;
-    console.log(req.body);
-    console.log(name);
-    console.log(description);
     await Destination.create({name, description});
     request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
         headers: {
