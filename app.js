@@ -68,7 +68,7 @@ app.get('/', async function (req, res, next) {
                 destinations: destinations
             });
         }
-    });
+    }); 
     request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
         headers: {
             'x-trustifi-key': process.env.TRUSTIFI_KEY,
