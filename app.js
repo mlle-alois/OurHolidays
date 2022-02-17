@@ -28,6 +28,12 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const recipients = [
+    {"email": "alois.zimmermann45@gmail.com"},
+    {"email": "alois.rosenthal45@gmail.com"},
+    {"email": "ichtitski@gmail.com"}
+]
+
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
@@ -69,7 +75,7 @@ app.get('/', async function (req, res, next) {
             'x-trustifi-secret': process.env.TRUSTIFI_SECRET
         },
         json: {
-            "recipients": [{"email": "alois.zimmermann45@gmail.com"}],
+            "recipients": recipients,
             "title": "New connection on Our Holidays",
             "html": "We hope you enjoy the app !"
         }
@@ -87,7 +93,7 @@ app.post('/', async function (req, res, next) {
             'x-trustifi-secret': process.env.TRUSTIFI_SECRET
         },
         json: {
-            "recipients": [{"email": "alois.zimmermann45@gmail.com"}],
+            "recipients": recipients,
             "title": "Destination added !",
             "html": "The Our Holidays app wishes you a good moment!"
         }
