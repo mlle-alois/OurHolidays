@@ -1,3 +1,5 @@
+import request from "request";
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -28,89 +30,104 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 String.prototype.capitalize = function () {
-  return this.charAt(0).toUpperCase() + this.slice(1);
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 app.get('/', async function (req, res, next) {
-  let destinations = [];
-  try {
-    destinations = await Destination.findAll();
-  } catch (e) {}
-  const params = {
-    Bucket: config.s3.bucket,
-    Delimiter: '/'
-  };
-
-  const images = [];
-  s3.listObjects(params, function (err, data) {
-    if (err) {
-      res.send(err);
-    } else {
-      console.log(data)
-      for (i in data.Contents) {
-        const image = data.Contents[i];
-        const imageProps = {
-          url: '/file/' + image.Key,
-          full_suffix: config.suffix.full
-        };
-        images.push(imageProps);
-      }
-      res.render('index', {
-        'images': images,
-        destinations: destinations
-      });
+    let destinations = [];
+    try {
+        destinations = await Destination.findAll();
+    } catch (e) {
     }
-  });
+    const params = {
+        Bucket: config.s3.bucket,
+        Delimiter: '/'
+    };
+
+    const images = [];
+    s3.listObjects(params, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            console.log(data)
+            for (i in data.Contents) {
+                const image = data.Contents[i];
+                const imageProps = {
+                    url: '/file/' + image.Key,
+                    full_suffix: config.suffix.full
+                };
+                images.push(imageProps);
+            }
+            res.render('index', {
+                'images': images,
+                destinations: destinations
+            });
+        }
+    });
 });
 
 app.post('/', async function (req, res, next) {
-  const {name, description} = req.body;
-  console.log(req.body);
-  console.log(name);
-  console.log(description);
-  await Destination.create({ name, description });
-  res.redirect('/');
+    const {name, description} = req.body;
+    console.log(req.body);
+    console.log(name);
+    console.log(description);
+    await Destination.create({name, description});
+    request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
+        headers: {
+            'x-trustifi-key': process.env.TRUSTIFI_KEY,
+            'x-trustifi-secret': process.env.TRUSTIFI_SECRET
+        },
+        json: {
+            "recipients": [{"email": "alois.zimmermann45@gmail.com"}],
+            "title": "Destination added !",
+            "html": "The Our Holidays app wishes you a good moment!"
+        }
+    }, (err, res, body) => {
+        console.log(body);
+    });
+    res.redirect('/');
 });
 
 app.get('/destinations', async function (req, res, next) {
-  let destinations = [];
-  try {
-    destinations = await Destination.findAll();
-  } catch (e) {}
-  res.send(JSON.stringify(destinations, null, 2));
+    let destinations = [];
+    try {
+        destinations = await Destination.findAll();
+    } catch (e) {
+    }
+    res.send(JSON.stringify(destinations, null, 2));
 });
 
 app.get('/file/:filename', function (req, res) {
-  const params = {
-    Bucket: config.s3.bucket,
-    Key: req.params.filename,
-  };
+    const params = {
+        Bucket: config.s3.bucket,
+        Key: req.params.filename,
+    };
 
-  s3.getObject(params, function (err, data) {
-    if (err) {
-      res.send(err);
-    } else {
-      console.log(data);
-      res.contentType(data.ContentType);
-      res.send(data.Body);
-    }
-  });
+    s3.getObject(params, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            console.log(data);
+            res.contentType(data.ContentType);
+            res.send(data.Body);
+        }
+    });
 })
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 /*const server = app.listen(port, function () {
