@@ -1,5 +1,4 @@
-import request from "request";
-
+const request = require("request")
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
