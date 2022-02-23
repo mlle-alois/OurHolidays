@@ -70,7 +70,7 @@ app.get('/', async function (req, res, next) {
             });
         }
     }); 
-    request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
+    /*request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
         headers: {
             'x-trustifi-key': process.env.TRUSTIFI_KEY,
             'x-trustifi-secret': process.env.TRUSTIFI_SECRET
@@ -82,7 +82,7 @@ app.get('/', async function (req, res, next) {
         }
     }, (err, res, body) => {
         console.log(body);
-    });
+    });*/
 });
 
 app.post('/', async function (req, res, next) {
