@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const recipients = [
-    //{"email": "alois.zimmermann45@gmail.com"},
+    {"email": "alois.zimmermann45@gmail.com"},
     {"email": "alois.rosenthal45@gmail.com"},
     //{"email": "ichtitski@gmail.com"},
     //{"email": "amedouillard@hotmail.fr"}
