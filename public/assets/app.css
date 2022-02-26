@@ -79,3 +79,17 @@ img.full {
   left: 50%;
   top: 50%;
 }
+
+.form-errors {
+  color: #f02849;
+  font-size: 13px;
+  line-height: 16px;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.file {
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+  color: #212529;
+}
