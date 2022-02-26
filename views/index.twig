@@ -4,11 +4,28 @@
     <div class="p-10 bg-white rounded-2xl shadow-lg" style="width: 50%; float: left; margin-left: 20px">
         <h1 class="font-semibold text-2xl">Our Holidays</h1>
         <h2 class="font-semibold text-xl">Add new destination</h2>
-        <form class="flex flex-col pt-4" method="post" enctype="application/x-www-form-urlencoded">
+        {% if errors %}
+            <div class="form-errors">
+                {% for error in  errors %}
+                    {% for prop in error %}
+                        <p>{{ prop.msg }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form class="flex flex-col pt-4" method="post" enctype="multipart/form-data" action="/">
             <input class="w-full bg-white shadow-lg rounded-xl border border-900 mb-4 p-4" type="text"
                    name="name" placeholder="Name"/>
             <textarea class="w-full h-32 bg-white shadow-lg rounded-xl border border-900 mb-4 p-4"
                       name="description" placeholder="Description"></textarea>
+            <input
+                    class="file shadow-lg px-4 py-2 cursor-pointer mb-4 rounded-xl"
+                    id="image-input"
+                    type="file"
+                    name="image"
+                    accept=".jpeg, .jpg, .png"
+                    placeholder="image"
+            />
             <div class="input-group-btn">
                 <input class="bg-900 text-white rounded-xl shadow-lg px-4 py-2 cursor-pointer" type="submit"
                        value="Create !"/>
