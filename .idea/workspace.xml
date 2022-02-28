@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a46696d1-794a-49e9-9e0d-c0fad73f4437" name="Default Changelist" comment="">
+    <list default="true" id="a46696d1-794a-49e9-9e0d-c0fad73f4437" name="Default Changelist" comment="Déplacement des routes dans fichier routes&#10;+ upload images + validation formulaire simple">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +29,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="javascript.nodejs.core.library.configured.version" value="16.13.2" />
+    <property name="javascript.nodejs.core.library.typings.version" value="16.11.25" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TEST" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -38,11 +39,14 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\alois\Documents\4AL\Cloud_et_Infrastructure\OurHolidays" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/assets" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -71,6 +75,42 @@
       <workItem from="1645628839025" duration="2497000" />
       <workItem from="1645633783085" duration="12000" />
     </task>
+    <task id="LOCAL-00001" summary="ajoute variable db conf">
+      <created>1645876064439</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1645876064439</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ajoute style bouton upload">
+      <created>1645876168219</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1645876168219</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ajoute dépendances">
+      <created>1645876436218</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1645876436218</updated>
+    </task>
+    <task id="LOCAL-00004" summary="maj config wasabi">
+      <created>1645876579272</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1645876579273</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Déplacement des routes dans fichier routes&#10;+ upload images + validation formulaire simple">
+      <created>1645876767021</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1645876767021</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,9 +126,15 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="change style" />
+    <MESSAGE value="ajoute variable db conf" />
+    <MESSAGE value="ajoute style bouton upload" />
+    <MESSAGE value="ajoute dépendances" />
+    <MESSAGE value="maj config wasabi" />
+    <MESSAGE value="Déplacement des routes dans fichier routes&#10;+ upload images + validation formulaire simple" />
+    <option name="LAST_COMMIT_MESSAGE" value="Déplacement des routes dans fichier routes&#10;+ upload images + validation formulaire simple" />
   </component>
 </project>
