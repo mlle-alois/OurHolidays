@@ -38,7 +38,7 @@ router.get('/', async function (req, res) {
     };
 
     const images = [];
-    s3.listObjects(params, ofunction (err, data) {
+    s3.listObjects(params, function (err, data) {
         if (err) {
             res.send(err);
         } else {
