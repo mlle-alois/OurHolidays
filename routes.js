@@ -214,5 +214,22 @@ router.post('/',
         }, 99);
     });
 
+router.post('/sentry',
+    async function (req, res) {
+        const transaction = sentry.startTransaction({
+            op: "Test Sentry",
+            name: "Test Sentry",
+        });
+        setTimeout(async () => {
+            try {
+                sentry.captureException("Test Sentry");
+            } catch (e) {
+                sentry.captureException(e);
+            } finally {
+                transaction.finish();
+            }
+        }, 99);
+    });
+
 
 module.exports = router;
