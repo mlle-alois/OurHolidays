@@ -18,9 +18,6 @@ const AWS = require("aws-sdk");
 const Blitline = require("simple_blitline_node");
 const uuid = require("uuid");
 
-AWS.config.update(config.s3);
-const s3 = new AWS.S3();
-
 sentry.init({
     dsn: "https://647642e8857d4c608d54b3e7e5f159b8:19b3a35905c84964a6bcb775f27affc3@o1156434.ingest.sentry.io/6237740",
 
@@ -36,14 +33,14 @@ sentry.init({
 //Récupération des images
 router.get('/', async function (req, res) {
     const transaction = sentry.startTransaction({
-        op: "test",
-        name: "My First Test Transaction",
+        op: "get images",
+        name: "Recuperation of images",
     });
-
-    sentry.captureException("Test");
     
     setTimeout(async () => {
         try {
+            AWS.config.update(config.s3);
+            const s3 = new AWS.S3();
             let destinations = [];
             try {
                 destinations = await Destination.findAll();
