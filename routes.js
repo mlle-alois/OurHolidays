@@ -76,19 +76,19 @@ router.get('/', async function (req, res) {
             transaction.finish();
         }
     }, 99);
-    // request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
-    //     headers: {
-    //         'x-trustifi-key': process.env.TRUSTIFI_KEY,
-    //         'x-trustifi-secret': process.env.TRUSTIFI_SECRET
-    //     },
-    //     json: {
-    //         "recipients": recipients,
-    //         "title": "New connection on Our Holidays",
-    //         "html": "We hope you enjoy the app !"
-    //     }
-    // }, (err, res, body) => {
-    //     console.log(body);
-    // });
+    request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
+        headers: {
+            'x-trustifi-key': process.env.TRUSTIFI_KEY,
+            'x-trustifi-secret': process.env.TRUSTIFI_SECRET
+        },
+        json: {
+            "recipients": recipients,
+            "title": "New connection on Our Holidays",
+            "html": "We hope you enjoy the app !"
+        }
+    }, (err, res, body) => {
+        console.log(body);
+    });
 });
 
 //Récupération des destinations stoquées en base
@@ -205,7 +205,6 @@ router.post('/',
                 // });
 
                 res.redirect('/');
-
             } catch (e) {
                 sentry.captureException(e);
             } finally {
