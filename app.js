@@ -3,7 +3,6 @@ const express = require('express');
 
 const routes = require('./routes');
 
-const request = require("request");
 const createError = require('http-errors');
 
 const nodeUtil = require('util');

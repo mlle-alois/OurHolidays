@@ -3,6 +3,7 @@ const config = require("./config");
 const router = express.Router();
 const sentry = require("@sentry/node")
 const tracing = require("@sentry/tracing")
+const request = require("request");
 
 //Pour les formulaires multipart/form-data
 const multer = require('multer');
