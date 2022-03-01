@@ -4,7 +4,7 @@ module.exports = {
     accessKeyId: 'Z6THZ90I1DITCB39DL1Y',
     secretAccessKey: 'wBPygdegDIH1gg3W4Vs0LwRRWW34iPDkjBVr2TSi',
     endpoint: 's3.eu-west-1.wasabisys.com',
-    bucket: 'our-holidays-test',
+    bucket: 'our-holidays-project',
   },
   suffix: {
     small: '_small.jpg',
