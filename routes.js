@@ -1,8 +1,8 @@
 const express = require('express');
 const config = require("./config");
 const router = express.Router();
-import * as Sentry from "@sentry/node";
-import * as Tracing from "@sentry/tracing";
+const sentry = require("@sentry/node")
+const tracing = require("@sentry/tracing")
 
 //Pour les formulaires multipart/form-data
 const multer = require('multer');
