@@ -69,6 +69,7 @@ router.get('/', async function (req, res) {
     // }, (err, res, body) => {
     //     console.log(body);
     // });
+    throw new Error('Whoops!')
 });
 
 //Récupération des destinations stoquées en base
