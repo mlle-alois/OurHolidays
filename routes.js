@@ -15,7 +15,6 @@ const {body, validationResult} = require('express-validator');
 const Destination = require("./destination");
 
 const AWS = require("aws-sdk");
-const Blitline = require("simple_blitline_node");
 const uuid = require("uuid");
 AWS.config.update(config.s3);
 const s3 = new AWS.S3();
@@ -26,11 +25,11 @@ sentry.init({
     tracesSampleRate: 1.0,
 });
 
-// const recipients = [
-//     {"email": "alois.zimmermann45@gmail.com"},
-//     {"email": "amedouillard@gmail.com"},
-//     {"email": "ichtitski@gmail.com"}
-// ]
+const recipients = [
+    {"email": "alois.rosenthal45@gmail.com"},
+    //{"email": "amedouillard@gmail.com"},
+    //{"email": "ichtitski@gmail.com"}
+]
 
 //Récupération des images
 router.get('/', async function (req, res) {
