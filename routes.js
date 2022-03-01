@@ -81,6 +81,7 @@ router.get('/destinations', async function (req, res) {
         console.error(error);
     }
     res.send(JSON.stringify(destinations, null, 2));
+    throw new Error('Whoops!')
 });
 
 //Récupération image
