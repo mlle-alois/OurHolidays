@@ -21,7 +21,7 @@ const uuid = require("uuid");
 AWS.config.update(config.s3);
 const s3 = new AWS.S3();
 
-Sentry.init({
+sentry.init({
     dsn: "https://647642e8857d4c608d54b3e7e5f159b8:19b3a35905c84964a6bcb775f27affc3@o1156434.ingest.sentry.io/6237740",
 
     tracesSampleRate: 1.0,
@@ -35,12 +35,12 @@ Sentry.init({
 
 //Récupération des images
 router.get('/', async function (req, res) {
-    const transaction = Sentry.startTransaction({
+    const transaction = sentry.startTransaction({
         op: "test",
         name: "My First Test Transaction",
     });
 
-    Sentry.captureException("Test");
+    sentry.captureException("Test");
     
     setTimeout(async () => {
         try {
@@ -74,7 +74,7 @@ router.get('/', async function (req, res) {
                 }
             });
         } catch (e) {
-            Sentry.captureException(e);
+            sentry.captureException(e);
         } finally {
             transaction.finish();
         }
