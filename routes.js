@@ -28,6 +28,8 @@ const s3 = new AWS.S3();
 //Récupération des images
 router.get('/', async function (req, res) {
     let destinations = [];
+    let test;
+    console.log(test)
     try {
         destinations = await Destination.findAll();
     } catch (e) {
