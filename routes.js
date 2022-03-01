@@ -222,7 +222,7 @@ router.post('/sentry',
         });
         setTimeout(async () => {
             try {
-                console.log("Ici ça fait un timeout")
+                sentry.captureException("Test Sentry");
             } catch (e) {
                 sentry.captureException(e);
             } finally {
