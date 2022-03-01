@@ -1,6 +1,8 @@
 const express = require('express');
 const config = require("./config");
 const router = express.Router();
+import * as Sentry from "@sentry/node";
+import * as Tracing from "@sentry/tracing";
 
 //Pour les formulaires multipart/form-data
 const multer = require('multer');
@@ -19,6 +21,12 @@ const uuid = require("uuid");
 AWS.config.update(config.s3);
 const s3 = new AWS.S3();
 
+Sentry.init({
+    dsn: "https://647642e8857d4c608d54b3e7e5f159b8:19b3a35905c84964a6bcb775f27affc3@o1156434.ingest.sentry.io/6237740",
+
+    tracesSampleRate: 1.0,
+});
+
 // const recipients = [
 //     {"email": "alois.zimmermann45@gmail.com"},
 //     {"email": "amedouillard@gmail.com"},
@@ -27,35 +35,50 @@ const s3 = new AWS.S3();
 
 //Récupération des images
 router.get('/', async function (req, res) {
-    let destinations = [];
-    try {
-        destinations = await Destination.findAll();
-    } catch (e) {
-    }
-    const params = {
-        Bucket: config.s3.bucket,
-        Delimiter: '/'
-    };
-
-    const images = [];
-    s3.listObjects(params, function (err, data) {
-        if (err) {
-            res.send(err);
-        } else {
-            for (i in data.Contents) {
-                const image = data.Contents[i];
-                const imageProps = {
-                    url: '/file/' + image.Key,
-                    full_suffix: config.suffix.full
-                };
-                images.push(imageProps);
-            }
-            res.render('index', {
-                'images': images,
-                destinations: destinations
-            });
-        }
+    const transaction = Sentry.startTransaction({
+        op: "test",
+        name: "My First Test Transaction",
     });
+
+    Sentry.captureException("Test");
+    
+    setTimeout(async () => {
+        try {
+            let destinations = [];
+            try {
+                destinations = await Destination.findAll();
+            } catch (e) {
+            }
+            const params = {
+                Bucket: config.s3.bucket,
+                Delimiter: '/'
+            };
+
+            const images = [];
+            s3.listObjects(params, function (err, data) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    for (let i in data.Contents) {
+                        const image = data.Contents[i];
+                        const imageProps = {
+                            url: '/file/' + image.Key,
+                            full_suffix: config.suffix.full
+                        };
+                        images.push(imageProps);
+                    }
+                    res.render('index', {
+                        'images': images,
+                        destinations: destinations
+                    });
+                }
+            });
+        } catch (e) {
+            Sentry.captureException(e);
+        } finally {
+            transaction.finish();
+        }
+    }, 99);
     // request.post(process.env.TRUSTIFI_URL + '/api/i/v1/email', {
     //     headers: {
     //         'x-trustifi-key': process.env.TRUSTIFI_KEY,
@@ -69,7 +92,6 @@ router.get('/', async function (req, res) {
     // }, (err, res, body) => {
     //     console.log(body);
     // });
-    throw new Error('Whoops!')
 });
 
 //Récupération des destinations stoquées en base
@@ -81,7 +103,6 @@ router.get('/destinations', async function (req, res) {
         console.error(error);
     }
     res.send(JSON.stringify(destinations, null, 2));
-    throw new Error('Whoops!')
 });
 
 //Récupération image
